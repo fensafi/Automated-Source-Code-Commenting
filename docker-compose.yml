@@ -17,7 +17,7 @@ services:
   comment_generator:
     build:
       context: ./comment-generation-microservice  # Set the build context to the comment-generator directory
-      dockerfile: Dockerfile1  # Dockerfile for the comment-generator service
+      dockerfile: Dockerfile  # Dockerfile for the comment-generator service
     volumes:
       - ./comment-generation-microservice:/app  # Mount the comment-generation-microservice directory to the container
     environment:
@@ -30,7 +30,7 @@ services:
   comment_inserter:
     build:
       context: ./comment-insertion-microservice  # Set the build context to the comment-inserter directory
-      dockerfile: Dockerfile2  # Dockerfile for the comment-inserter service
+      dockerfile: Dockerfile  # Dockerfile for the comment-inserter service
     volumes:
       - ./comment-insertion-microservice:/app  # Mount the comment-insertion-microservice directory to the container
     environment:
