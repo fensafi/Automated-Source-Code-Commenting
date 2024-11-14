@@ -1,22 +1,40 @@
-version: '3.8'
+version: '3'
 
 services:
   code_parser:
-    build: ./code-parsing-microservice
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    environment:
+      - REQUIREMENTS_FILE=requirements.txt  # Points to requirements.txt for this service
     ports:
       - "8001:8001"
     networks:
       - app-network
 
-  comment_generator:
-    build: ./comment-generation-microservice
+  comment_inserter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    environment:
+      - REQUIREMENTS_FILE=requirements2.txt  # Points to requirements1.txt for this service
     ports:
       - "8002:8002"
     networks:
       - app-network
 
-  comment_inserter:
-    build: ./comment-insertion-microservice
+  comment_generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    environment:
+      - REQUIREMENTS_FILE=requirements1.txt  # Points to requirements2.txt for this service
     ports:
       - "8003:8003"
     networks:
