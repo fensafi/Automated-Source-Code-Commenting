@@ -4,14 +4,14 @@ FROM python:3.8-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy only the requirements file from the correct path to leverage Docker's cache mechanism
-COPY ./code-parsing-microservice/requirements.txt
+# Copy the requirements.txt file from the correct location
+COPY ./code-parsing-microservice/requirements.txt /app/requirements.txt
 
 # Install the dependencies listed in the requirements.txt file
-RUN pip install --no-cache-dir -r /requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy all other files after installing dependencies
 COPY . .
 
 # Run the FastAPI app using Uvicorn when the container starts
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8002"]
