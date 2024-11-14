@@ -4,11 +4,11 @@ services:
   code_parser:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  # Ensure Dockerfile is named Dockerfile and exists in this directory
     volumes:
       - .:/app
     environment:
-      - REQUIREMENTS_FILE=requirements.txt  # Points to requirements.txt for this service
+      - REQUIREMENTS_FILE=requirements.txt
     ports:
       - "8001:8001"
     networks:
@@ -17,11 +17,11 @@ services:
   comment_generator:
     build:
       context: .
-      dockerfile: Dockerfile1
+      dockerfile: Dockerfile1  # Ensure Dockerfile1 is named Dockerfile1 and exists in this directory
     volumes:
       - .:/app
     environment:
-      - REQUIREMENTS_FILE=requirements1.txt  # Points to requirements2.txt for this service
+      - REQUIREMENTS_FILE=requirements1.txt
     ports:
       - "8003:8003"
     networks:
@@ -30,11 +30,11 @@ services:
   comment_inserter:
     build:
       context: .
-      dockerfile: Dockerfile2
+      dockerfile: Dockerfile2  # Ensure Dockerfile2 is named Dockerfile2 and exists in this directory
     volumes:
       - .:/app
     environment:
-      - REQUIREMENTS_FILE=requirements2.txt  # Points to requirements1.txt for this service
+      - REQUIREMENTS_FILE=requirements2.txt
     ports:
       - "8002:8002"
     networks:
