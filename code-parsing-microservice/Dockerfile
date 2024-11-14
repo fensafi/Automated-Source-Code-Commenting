@@ -5,10 +5,10 @@ FROM python:3.8-slim
 WORKDIR /app
 
 # Copy only the requirements file from the correct path to leverage Docker's cache mechanism
-COPY ./code-parsing-microservice/requirements.txt /app/requirements.txt
+COPY ./code-parsing-microservice/requirements.txt /requirements.txt
 
 # Install the dependencies listed in the requirements.txt file
-RUN pip install --no-cache-dir -r /app/requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
 # Copy all other files after installing dependencies
 COPY . .
