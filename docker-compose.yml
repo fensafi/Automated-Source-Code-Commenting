@@ -30,7 +30,7 @@ services:
   comment_generator:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile1
     volumes:
       - .:/app
     environment:
