@@ -14,19 +14,6 @@ services:
     networks:
       - app-network
 
-  comment_inserter:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - .:/app
-    environment:
-      - REQUIREMENTS_FILE=requirements2.txt  # Points to requirements1.txt for this service
-    ports:
-      - "8002:8002"
-    networks:
-      - app-network
-
   comment_generator:
     build:
       context: .
@@ -37,6 +24,19 @@ services:
       - REQUIREMENTS_FILE=requirements1.txt  # Points to requirements2.txt for this service
     ports:
       - "8003:8003"
+    networks:
+      - app-network
+
+  comment_inserter:
+    build:
+      context: .
+      dockerfile: Dockerfile2
+    volumes:
+      - .:/app
+    environment:
+      - REQUIREMENTS_FILE=requirements2.txt  # Points to requirements1.txt for this service
+    ports:
+      - "8002:8002"
     networks:
       - app-network
 
