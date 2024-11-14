@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the requirements.txt file from the correct location
 COPY ./comment-generation-microservice/requirements.txt /app/requirements.txt
 
-# Install the dependencies listed in the requirements.txt file
+# Install the dependencies listed in the requirements.txtfile
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy all other files after installing dependencies
