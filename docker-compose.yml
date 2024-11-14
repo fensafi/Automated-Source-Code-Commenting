@@ -3,12 +3,12 @@ version: '3'
 services:
   code_parser:
     build:
-      context: ./code-parsing-microservice  # Set the build context to the directory of the code-parser service
-      dockerfile: Dockerfile  # Dockerfile for the code-parser service
+      context: ./code-parsing-microservice  
+      dockerfile: Dockerfile  
     volumes:
-      - ./code-parsing-microservice:/app  # Mount the code-parsing-microservice directory to the container
+      - ./code-parsing-microservice:/app 
     environment:
-      - REQUIREMENTS_FILE=requirements.txt  # Point to requirements.txt for this service
+      - REQUIREMENTS_FILE=requirements.txt
     ports:
       - "8001:8001"
     networks:
@@ -16,12 +16,12 @@ services:
 
   comment_generator:
     build:
-      context: ./comment-generation-microservice  # Set the build context to the comment-generator directory
-      dockerfile: Dockerfile  # Dockerfile for the comment-generator service
+      context: ./comment-generation-microservice 
+      dockerfile: Dockerfile  
     volumes:
-      - ./comment-generation-microservice:/app  # Mount the comment-generation-microservice directory to the container
+      - ./comment-generation-microservice:/app 
     environment:
-      - REQUIREMENTS_FILE=requirements.txt  # Point to requirements1.txt for this service
+      - REQUIREMENTS_FILE=requirements.txt
     ports:
       - "8003:8003"
     networks:
@@ -29,12 +29,12 @@ services:
 
   comment_inserter:
     build:
-      context: ./comment-insertion-microservice  # Set the build context to the comment-inserter directory
-      dockerfile: Dockerfile  # Dockerfile for the comment-inserter service
+      context: ./comment-insertion-microservice  
+      dockerfile: Dockerfile  
     volumes:
-      - ./comment-insertion-microservice:/app  # Mount the comment-insertion-microservice directory to the container
+      - ./comment-insertion-microservice:/app 
     environment:
-      - REQUIREMENTS_FILE=requirements.txt  # Point to requirements2.txt for this service
+      - REQUIREMENTS_FILE=requirements.txt
     ports:
       - "8002:8002"
     networks:
