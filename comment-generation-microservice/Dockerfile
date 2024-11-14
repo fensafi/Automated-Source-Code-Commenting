@@ -4,11 +4,11 @@ FROM python:3.8-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements1.txt file from the correct location
-COPY ./comment-generation-microservice/requirements1.txt /app/requirements1.txt
+# Copy the requirements.txt file from the correct location
+COPY ./comment-generation-microservice/requirements.txt /app/requirements.txt
 
 # Install the dependencies listed in the requirements.txt file
-RUN pip install --no-cache-dir -r /app/requirements1.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy all other files after installing dependencies
 COPY . .

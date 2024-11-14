@@ -4,11 +4,11 @@ FROM python:3.8-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements2.txt file from the correct location
-COPY ./comment-insertion-microservice/requirements2.txt /app/requirements2.txt
+# Copy the requirements.txt file from the correct location
+COPY ./comment-insertion-microservice/requirements.txt /app/requirements.txt
 
 # Install the dependencies listed in the requirements.txt file
-RUN pip install --no-cache-dir -r /app/requirements2.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy all other files after installing dependencies
 COPY . .

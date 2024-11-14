@@ -21,7 +21,7 @@ services:
     volumes:
       - ./comment-generation-microservice:/app  # Mount the comment-generation-microservice directory to the container
     environment:
-      - REQUIREMENTS_FILE=requirements1.txt  # Point to requirements1.txt for this service
+      - REQUIREMENTS_FILE=requirements.txt  # Point to requirements1.txt for this service
     ports:
       - "8003:8003"
     networks:
@@ -34,7 +34,7 @@ services:
     volumes:
       - ./comment-insertion-microservice:/app  # Mount the comment-insertion-microservice directory to the container
     environment:
-      - REQUIREMENTS_FILE=requirements2.txt  # Point to requirements2.txt for this service
+      - REQUIREMENTS_FILE=requirements.txt  # Point to requirements2.txt for this service
     ports:
       - "8002:8002"
     networks:
