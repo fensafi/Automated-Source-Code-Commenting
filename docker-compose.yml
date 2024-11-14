@@ -3,12 +3,12 @@ version: '3'
 services:
   code_parser:
     build:
-      context: .
-      dockerfile: Dockerfile  # Ensure Dockerfile is named Dockerfile and exists in this directory
+      context: ./code-parsing-microservice  # Set the build context to the directory of the code-parser service
+      dockerfile: Dockerfile  # Dockerfile for the code-parser service
     volumes:
-      - .:/app
+      - ./code-parsing-microservice:/app  # Mount the code-parsing-microservice directory to the container
     environment:
-      - REQUIREMENTS_FILE=requirements.txt
+      - REQUIREMENTS_FILE=requirements.txt  # Point to requirements.txt for this service
     ports:
       - "8001:8001"
     networks:
@@ -16,12 +16,12 @@ services:
 
   comment_generator:
     build:
-      context: .
-      dockerfile: Dockerfile1  # Ensure Dockerfile1 is named Dockerfile1 and exists in this directory
+      context: ./comment-generation-microservice  # Set the build context to the comment-generator directory
+      dockerfile: Dockerfile1  # Dockerfile for the comment-generator service
     volumes:
-      - .:/app
+      - ./comment-generation-microservice:/app  # Mount the comment-generation-microservice directory to the container
     environment:
-      - REQUIREMENTS_FILE=requirements1.txt
+      - REQUIREMENTS_FILE=requirements1.txt  # Point to requirements1.txt for this service
     ports:
       - "8003:8003"
     networks:
@@ -29,12 +29,12 @@ services:
 
   comment_inserter:
     build:
-      context: .
-      dockerfile: Dockerfile2  # Ensure Dockerfile2 is named Dockerfile2 and exists in this directory
+      context: ./comment-insertion-microservice  # Set the build context to the comment-inserter directory
+      dockerfile: Dockerfile2  # Dockerfile for the comment-inserter service
     volumes:
-      - .:/app
+      - ./comment-insertion-microservice:/app  # Mount the comment-insertion-microservice directory to the container
     environment:
-      - REQUIREMENTS_FILE=requirements2.txt
+      - REQUIREMENTS_FILE=requirements2.txt  # Point to requirements2.txt for this service
     ports:
       - "8002:8002"
     networks:
