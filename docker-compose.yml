@@ -1,45 +1,44 @@
-version: '3'
-
 services:
-  code_parser:
-    build:
-      context: ./code-parsing-microservice  
-      dockerfile: Dockerfile  
-    volumes:
-      - ./code-parsing-microservice:/app 
-    environment:
-      - REQUIREMENTS_FILE=requirements.txt
+  code-parsing-microservice:
+    build: ./code-parsing-microservice
+    container_name: code-parsing-service
     ports:
-      - "8001:8001"
+      - "8001:8000"
+      - "17000:17000"
     networks:
-      - app-network
+      - source_commenting_tool_net
 
-  comment_generator:
-    build:
-      context: ./comment-generation-microservice 
-      dockerfile: Dockerfile  
-    volumes:
-      - ./comment-generation-microservice:/app 
-    environment:
-      - REQUIREMENTS_FILE=requirements.txt
+  comment-generation-microservice:
+    build: ./comment-generation-microservice
+    container_name: comment-generation-service
+    depends_on:
+      - code-parsing-microservice
     ports:
-      - "8003:8003"
+      - "8002:8000"
+      - "17001:17001"
     networks:
-      - app-network
+      - source_commenting_tool_net
 
-  comment_inserter:
-    build:
-      context: ./comment-insertion-microservice  
-      dockerfile: Dockerfile  
-    volumes:
-      - ./comment-insertion-microservice:/app 
-    environment:
-      - REQUIREMENTS_FILE=requirements.txt
+  comment-insertion-microservice:
+    build: ./comment-insertion-microservice
+    container_name: comment-insertion-service
+    depends_on:
+      - comment-generation-microservice
     ports:
-      - "8002:8002"
+      - "8003:8000"
     networks:
-      - app-network
+      - source_commenting_tool_net
+
+  web-interface-microservice:
+    build: ./web-interface-microservice
+    container_name: web-interface-service
+    depends_on:
+      - comment-insertion-microservice
+    ports:
+      - "8004:8004"
+    networks:
+      - source_commenting_tool_net
 
 networks:
-  app-network:
+  source_commenting_tool_net:
     driver: bridge

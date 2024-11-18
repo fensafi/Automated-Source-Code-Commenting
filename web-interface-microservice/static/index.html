@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Code Commenting</title>
+</head>
+<body>
+    <h1>Automated Code Commenting Tool</h1>
+    <form id="codeForm" action="/submit_code" method="post">
+        <label for="code">Enter your code:</label><br>
+        <textarea id="code" name="code" rows="10" cols="50"></textarea><br>
+        <button type="submit">Generate Comments</button>
+    </form>
+
+    <div id="result" style="display:none; margin-top: 20px;">
+        <h3>Comments have been successfully added to your code!</h3>
+        <p>You can download your file:</p>
+        <a id="downloadLink" href="/download" download="commented_code.txt">
+            <button>Download</button>
+        </a>
+    </div>
+
+    <script>
+        const form = document.getElementById('codeForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent form from reloading the page
+
+            const code = document.getElementById('code').value;
+
+            try {
+                const response = await fetch('/submit_code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({ code }),
+                });
+
+                if (response.ok) {
+                    // Show the result div with the download link
+                    resultDiv.style.display = 'block';
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.detail}`);
+                }
+            } catch (err) {
+                console.error('Error submitting the form:', err);
+                alert('An unexpected error occurred.');
+            }
+        });
+    </script>
+</body>
+</html>
